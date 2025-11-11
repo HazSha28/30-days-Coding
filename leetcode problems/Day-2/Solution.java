@@ -17,3 +17,16 @@ public class Solution {
         return maxSum;
     }
 }
+
+//Optimal Solution: ‘Kadane’s Algorithm’ (Time: O(n), Space: O(1))
+public class Solution {
+    public int maxSubArray(int[] nums) {
+        int maxSum = nums[0];
+        int currSum = 0;
+        for (int i : nums) {
+            currSum = Math.max(i, currSum + i);
+            maxSum = Math.max(maxSum, currSum);
+        }
+        return maxSum;
+    }
+}
