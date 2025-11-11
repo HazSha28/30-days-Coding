@@ -46,3 +46,43 @@ class Solution {
         return ind;// return the count of unique elements
     }
 }
+
+
+//using arrays stream-O(n) time complexity and O(n) space complexity
+//not recommended because it creates an additional array,collections,objects which uses extra memory
+import java.util.*;
+import java.util.stream.*;
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int[] unique = Arrays.stream(nums).distinct().toArray();// Get unique elements using stream,
+        //distinct() method is used to filter out duplicate elements from the stream.
+        //toArray() method converts the stream back into an array.
+
+        for (int i = 0; i < unique.length; i++) {
+            nums[i] = unique[i];// Copy unique elements back to original array
+        }
+
+        return unique.length;   // Return the count of unique elements
+    }
+}
+
+//using hashset-O(n) time complexity and O(n) space complexity
+//-not recommended for large arrays due to extra space usage
+import java.util.*;
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        Set<Integer> set = new LinkedHashSet<>();
+        for (int num : nums) {
+            set.add(num);
+        }
+
+        int i = 0;
+        for (int num : set) {
+            nums[i++] = num;
+        }
+
+        return i;
+    }
+}
