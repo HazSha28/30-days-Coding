@@ -22,3 +22,27 @@ class Solution {
         return n;
     }
 }
+
+//optimal approach-O(n) time complexity and O(1) space complexity
+//Optimal = Two Pointers → O(n)
+import java.util.Arrays;
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        if (nums.length == 0)
+            return 0;
+
+        int ind = 1; // index for unique elements
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] != nums[i - 1]) // if not a duplicate
+            {
+                nums[ind] = nums[i];// place the unique element at the 'ind' index
+                ind++;// increment the index for next unique element
+            }
+        }
+
+        System.out.println(Arrays.toString(Arrays.copyOf(nums, ind)));// Arrays.copyOf(nums, ind)- creates a new array containing the first 'ind' elements of 'nums', which are the unique elements after removing duplicates.
+        return ind;// return the count of unique elements
+    }
+}
