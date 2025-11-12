@@ -20,6 +20,7 @@
 
 //Better approach,Time: O(n²),Space: O(n)
 //using prefix sum to avoid re-summing elements
+//Why No-  Still quadratic — will time out for large arrays (up to 20,000).
 
 class Solution {
     public int subarraySum(int[] nums, int k) {
@@ -40,3 +41,29 @@ class Solution {
     }
 }
 
+//Optimal approach,Time: O(n),Space: O(n)
+//using hashmap to store prefix sums and their frequencies
+import java.util.*;
+
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        Map<Integer, Integer> prefixCount = new HashMap<>();
+        prefixCount.put(0, 1); // one way to have sum = 0 (empty prefix)
+
+        int count = 0, prefixSum = 0;
+
+        for (int num : nums) {
+            prefixSum += num;
+
+            // Check if prefixSum - k existed before
+            if (prefixCount.containsKey(prefixSum - k)) {
+                count += prefixCount.get(prefixSum - k);
+            }
+
+            // Store current prefixSum in map
+            prefixCount.put(prefixSum, prefixCount.getOrDefault(prefixSum, 0) + 1);
+        }
+
+        return count;
+    }
+}
