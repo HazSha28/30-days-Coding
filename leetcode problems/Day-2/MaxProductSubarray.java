@@ -16,3 +16,27 @@ public int maxProductNaive(int[] nums) {
     return maxProd;
 }
 }
+
+//Complexity: O(n) time, O(1) extra space.
+public int maxProduct(int[] nums) {
+    int n = nums.length;
+    int max= nums[0];
+    int min = nums[0];
+    int globalMax = nums[0];
+
+    for (int i = 1; i < n; i++) {
+        int x = nums[i];
+        if (x < 0) {
+            // swap because negative will flip max/min
+            int temp = max;
+            max = min;
+            min = temp;
+        }
+        max = Math.max(x, max * x);
+        min = Math.min(x, min * x);
+        globalMax = Math.max(globalMax, max);
+    }
+
+    return globalMax;
+}
+
