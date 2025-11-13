@@ -40,3 +40,27 @@ public int maxProduct(int[] nums) {
     return globalMax;
 }
 
+//Good when you want a simpler logic than the min/max swap method and you’re okay with scanning twice. Still O(n) time, O(1) space
+public int maxProductTwoPass(int[] nums) {
+    int n = nums.length;
+    int maxProd = Integer.MIN_VALUE;
+    long prod = 1;
+    // forward
+    for (int i = 0; i < n; i++) {
+        prod *= nums[i];
+        maxProd = (int) Math.max(maxProd, prod);
+        if (nums[i] == 0) {
+            prod = 1;
+        }
+    }
+    // backward
+    prod = 1;
+    for (int i = n-1; i >= 0; i--) {
+        prod *= nums[i];
+        maxProd = (int) Math.max(maxProd, prod);
+        if (nums[i] == 0) {
+            prod = 1;
+        }
+    }
+    return maxProd;
+}
