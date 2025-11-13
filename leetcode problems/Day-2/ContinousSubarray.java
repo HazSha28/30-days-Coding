@@ -35,3 +35,24 @@ class Solution {
     }
 
 
+//time complexity: O(n)
+//space complexity: O(n)
+    public boolean checkSubarrSum(int[] nums, int k) {
+        int n = nums.length;
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, -1); // to handle the case when the subarray starts from index 0
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += nums[i];
+            int mod = sum % k;
+            if (map.containsKey(mod)) {
+                if (i - map.get(mod) > 1) {
+                    return true;
+                }
+            } else {
+                map.put(mod, i);
+            }
+        }
+        return false;
+    }
+
