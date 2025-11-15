@@ -1,7 +1,7 @@
 //Brute Force Approach-not optimal
 //Time Complexity: O(n^2)
 //Space Complexity: O(1)
-public class Solution {
+public class MaxSubarraysum {
     public int maxSubArray(int[] nums) {
         int n = nums.length;
         int maxSum = nums[0];
